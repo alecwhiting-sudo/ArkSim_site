@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+/*
+  ArkSim marketing site — sleek dark / techy theme.
+  The palette echoes the simulator itself: dark canvas, cyan/indigo "tokens of
+  light" travelling through a process.
+*/
+
+:root {
+  --background: #06070d;
+  --surface: #0c0e17;
+  --surface-2: #11131f;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+
+  --foreground: #e9ecf5;
+  --muted: #9aa3bd;
+  --muted-2: #6b7391;
+
+  /* Token-of-light accents */
+  --accent: #38e1c8; /* teal/cyan blob */
+  --accent-2: #5b8cff; /* indigo edge */
+  --accent-3: #a877ff; /* violet highlight */
+
+  --glow: 0 0 40px rgba(56, 225, 200, 0.35);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Ambient background: subtle grid + radial glow, fixed behind content. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(60% 50% at 50% -10%, rgba(91, 140, 255, 0.16), transparent 70%),
+    radial-gradient(40% 40% at 85% 20%, rgba(168, 119, 255, 0.1), transparent 70%),
+    radial-gradient(45% 45% at 10% 30%, rgba(56, 225, 200, 0.1), transparent 70%);
+  pointer-events: none;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 80%);
+  pointer-events: none;
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(
+      100deg,
+      var(--accent) 0%,
+      var(--accent-2) 55%,
+      var(--accent-3) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .card {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.035),
+      rgba(255, 255, 255, 0.01)
+    );
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    backdrop-filter: blur(6px);
+  }
+
+  .card-hover {
+    transition:
+      transform 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-3px);
+    border-color: var(--border-strong);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  }
+
+  .btn-primary {
+    background: linear-gradient(100deg, var(--accent), var(--accent-2));
+    color: #04121a;
+    font-weight: 650;
+    box-shadow:
+      0 8px 30px rgba(56, 225, 200, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+    box-shadow: 0 12px 40px rgba(56, 225, 200, 0.4);
+  }
+
+  .btn-ghost {
+    border: 1px solid var(--border-strong);
+    color: var(--foreground);
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+  .btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.28);
+  }
+}
+
+/* Blob drift animation used behind the hero flow diagram. */
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

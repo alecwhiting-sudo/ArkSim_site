@@ -1,0 +1,56 @@
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://arksim.io"),
+  title: "ArkSim — Process simulation, without the six-figure toolset",
+  description:
+    "ArkSim is a browser-based process simulator for analysts and consultants. Model automation, agents, controls and quality changes, and see the cost and time impact before you commit. A two-hour learning curve — not three months.",
+  keywords: [
+    "process simulation",
+    "discrete event simulation",
+    "business process modelling",
+    "AnyLogic alternative",
+    "Simul8 alternative",
+    "automation impact",
+    "process economics",
+  ],
+  openGraph: {
+    title: "ArkSim — Process simulation, without the six-figure toolset",
+    description:
+      "Model process change — automation, agents, controls, quality — and see the cost and time impact in minutes. Free during beta.",
+    type: "website",
+    siteName: "ArkSim",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ArkSim — Process simulation made simple",
+    description:
+      "Model process change and see the cost and time impact in minutes. Free during beta.",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        {children}
+      </body>
+    </html>
+  );
+}
