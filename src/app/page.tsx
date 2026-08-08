@@ -267,7 +267,7 @@ export default function Home() {
         <SectionHeading
           kicker="Where ArkSim fits"
           title="Right-sized simulation for everyday business processes"
-          sub="Tools like AnyLogic and Simul8 are superb — powerful, industrial-strength platforms for modelling complex physical systems. ArkSim is the light, rapid, low-cost option for the processes most teams run day to day."
+          sub="The specialist simulation platforms are superb — powerful, industrial-strength tools for modelling complex physical systems. ArkSim is the light, rapid, low-cost option for the processes most teams run day to day."
         />
 
         <div className="card mt-12 overflow-hidden">
@@ -284,7 +284,7 @@ export default function Home() {
                     </span>
                   </th>
                   <th className="p-5 text-base font-medium text-[var(--muted)]">
-                    AnyLogic / Simul8
+                    Specialist platforms
                   </th>
                 </tr>
               </thead>
