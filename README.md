@@ -1,7 +1,7 @@
 # ArkSim — marketing site
 
-Landing page for **ArkSim**, a browser-based discrete-event process simulator
-for business analysts and consultants. Built with Next.js (App Router),
+Landing page for **ArkSim**, a downloadable desktop discrete-event process
+simulator for business analysts and consultants. Built with Next.js (App Router),
 TypeScript and Tailwind CSS v4 — mirroring the [ArkSim app](https://github.com/alecwhiting-sudo/ArkSim)
 stack.
 
@@ -18,8 +18,6 @@ Other scripts: `npm run build`, `npm run start`, `npm run lint`.
 
 Site-wide values live in [`src/lib/site.ts`](./src/lib/site.ts):
 
-- **`appUrl`** — where every "Try it free" button points. Set this to the live
-  app URL. _(Currently a placeholder.)_
 - **`contactEmail`** — used by the "Talk to us" / Contact links.
 - **`downloads`** — desktop (Electron) installer links for the Download section.
   ArkSim is packaged with electron-builder: macOS gets one universal `.dmg`

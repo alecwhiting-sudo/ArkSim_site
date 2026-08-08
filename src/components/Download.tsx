@@ -96,14 +96,7 @@ export default function Download() {
       </div>
 
       <p className="mt-6 text-center text-sm text-[var(--muted-2)]">
-        Version {site.version} · Prefer no install?{" "}
-        <a
-          href={site.appUrl}
-          className="text-[var(--foreground)] underline decoration-[var(--border-strong)] underline-offset-4 hover:decoration-[var(--accent)]"
-        >
-          Run ArkSim in your browser
-        </a>
-        .
+        Version {site.version} · Free during beta · macOS &amp; Windows
       </p>
     </section>
   );

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { site } from "@/lib/site";
 import { Logo } from "@/components/Icons";
 
 const LINKS = [
@@ -41,10 +40,10 @@ export default function Nav() {
 
         <div className="hidden items-center gap-3 md:flex">
           <a
-            href={site.appUrl}
+            href="#download"
             className="btn-primary rounded-lg px-4 py-2 text-sm"
           >
-            Try it free
+            Download
           </a>
         </div>
 
@@ -78,10 +77,11 @@ export default function Nav() {
               </a>
             ))}
             <a
-              href={site.appUrl}
+              href="#download"
+              onClick={() => setOpen(false)}
               className="btn-primary mt-2 rounded-lg px-4 py-2.5 text-center text-sm"
             >
-              Try it free
+              Download
             </a>
           </div>
         </div>

@@ -169,34 +169,45 @@ export function IconWindows(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-/** ArkSim wordmark glyph: an ark/chevron formed from flowing tokens. */
+/**
+ * ArkSim logo mark: three stacked layers with a negative-space "S" threading
+ * through them. Monochrome (currentColor) so it inherits the surrounding text
+ * colour — white on the dark site. The S is carved out via a mask, exactly as
+ * in the source artwork.
+ */
 export function Logo(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
-      width={28}
-      height={28}
-      viewBox="0 0 32 32"
+      width={30}
+      height={30}
+      viewBox="0 0 100 100"
       fill="none"
       aria-hidden="true"
       {...props}
     >
-      <defs>
-        <linearGradient id="logoG" x1="0" y1="0" x2="32" y2="32">
-          <stop offset="0" stopColor="var(--accent)" />
-          <stop offset="0.55" stopColor="var(--accent-2)" />
-          <stop offset="1" stopColor="var(--accent-3)" />
-        </linearGradient>
-      </defs>
-      <path
-        d="M4 24 16 6l12 18"
-        stroke="url(#logoG)"
-        strokeWidth="2.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="9" cy="22" r="2.4" fill="var(--accent)" />
-      <circle cx="16" cy="12" r="2.6" fill="var(--accent-2)" />
-      <circle cx="23" cy="22" r="2.4" fill="var(--accent-3)" />
+      <mask
+        id="arksim-s-cut"
+        maskUnits="userSpaceOnUse"
+        x="0"
+        y="0"
+        width="100"
+        height="100"
+      >
+        <rect width="100" height="100" fill="white" />
+        <path
+          d="M70 22 C 34 26, 34 44, 50 50 C 66 56, 66 74, 32 78"
+          fill="none"
+          stroke="black"
+          strokeWidth="9"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </mask>
+      <g fill="currentColor" mask="url(#arksim-s-cut)">
+        <path d="M6 28 L18 20 L82 20 L94 28 L82 36 L18 36 Z" />
+        <path d="M6 50 L18 42 L82 42 L94 50 L82 58 L18 58 Z" />
+        <path d="M6 72 L18 64 L82 64 L94 72 L82 80 L18 80 Z" />
+      </g>
     </svg>
   );
 }

@@ -70,9 +70,9 @@ const compareRows: {
     arkGood: true,
   },
   {
-    label: "Runs in the browser",
-    ark: "Yes — nothing to install",
-    legacy: "Heavy desktop install",
+    label: "Setup",
+    ark: "Lightweight app, installs in minutes",
+    legacy: "Heavy install + licence servers",
     arkGood: true,
   },
   {
@@ -159,10 +159,10 @@ export default function Home() {
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <a
-                href={site.appUrl}
+                href="#download"
                 className="btn-primary inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-base"
               >
-                Try ArkSim free
+                Download ArkSim — free
                 <IconArrow width={18} height={18} />
               </a>
               <a
@@ -180,11 +180,11 @@ export default function Home() {
               </span>
               <span className="inline-flex items-center gap-2">
                 <IconCheck width={16} height={16} className="text-[var(--accent)]" />
-                Runs in your browser
+                Works offline
               </span>
               <span className="inline-flex items-center gap-2">
                 <IconCheck width={16} height={16} className="text-[var(--accent)]" />
-                No install, no sales call
+                No sales call
               </span>
             </div>
           </div>
@@ -412,7 +412,7 @@ export default function Home() {
                 "Baseline vs target cost & time on every run",
                 "Automation, AI-agent and rework modelling",
                 "Batch workloads up to 100,000 items",
-                "Nothing to install — just open the app",
+                "Works offline on your own machine",
               ].map((li) => (
                 <li key={li} className="flex items-start gap-2.5">
                   <IconCheck
@@ -425,10 +425,10 @@ export default function Home() {
               ))}
             </ul>
             <a
-              href={site.appUrl}
+              href="#download"
               className="btn-primary mt-8 flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base"
             >
-              Start simulating — free
+              Download ArkSim — free
               <IconArrow width={18} height={18} />
             </a>
             <p className="mt-4 text-center text-xs text-[var(--muted-2)]">
@@ -448,15 +448,15 @@ export default function Home() {
             <span className="text-gradient">Simulate it.</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-lg text-[var(--muted)]">
-            Open ArkSim, load the sample process, and have your first
+            Download ArkSim, load the sample process, and have your first
             baseline-vs-target result inside ten minutes.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <a
-              href={site.appUrl}
+              href="#download"
               className="btn-primary inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-base"
             >
-              Try ArkSim free
+              Download ArkSim free
               <IconArrow width={18} height={18} />
             </a>
             <a
