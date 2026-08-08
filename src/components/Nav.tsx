@@ -19,7 +19,7 @@ export default function Nav() {
     <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[rgba(6,7,13,0.72)] backdrop-blur-lg">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5">
         <a href="#top" className="flex items-center gap-2.5">
-          <Logo />
+          <Logo className="h-7 w-auto" priority />
           <span className="text-lg font-semibold tracking-tight">ArkSim</span>
           <span className="ml-1 rounded-full border border-[var(--border-strong)] px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-[var(--muted)]">
             Beta

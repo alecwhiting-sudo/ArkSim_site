@@ -47,7 +47,7 @@ const features = [
   {
     icon: IconGauge,
     title: "Batch workloads at any scale",
-    body: "One quarter-end report or 100,000 invoices a day. Set an arrival rate and watch a month compress into a few minutes of playback.",
+    body: "One quarter-end report or a full day's worth of invoices. Set an arrival rate and watch a month of work compress into a few minutes of playback.",
   },
 ];
 
@@ -198,12 +198,11 @@ export default function Home() {
 
       {/* ---------------- Positioning strip ---------------- */}
       <section className="border-y border-[var(--border)] bg-white/[0.015]">
-        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-5 py-8 text-center sm:grid-cols-4">
+        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 px-5 py-8 text-center sm:grid-cols-3">
           {[
-            ["≈2 hrs", "to a working model"],
+            ["<60 min", "to a working model"],
             ["£0", "during beta"],
-            ["4 min", "to replay a 90-day run"],
-            ["100k+", "items per simulation"],
+            ["3 min", "to illustrate a 30-day close-the-books process"],
           ].map(([big, small]) => (
             <div key={small}>
               <div className="text-2xl font-semibold text-gradient sm:text-3xl">
@@ -291,7 +290,7 @@ export default function Home() {
                   </th>
                   <th className="p-5">
                     <span className="inline-flex items-center gap-2 text-base font-semibold">
-                      <Logo width={20} height={20} /> ArkSim
+                      <Logo className="h-5 w-auto" /> ArkSim
                     </span>
                   </th>
                   <th className="p-5 text-base font-medium text-[var(--muted)]">
@@ -411,7 +410,7 @@ export default function Home() {
                 "The full discrete-event simulation engine",
                 "Baseline vs target cost & time on every run",
                 "Automation, AI-agent and rework modelling",
-                "Batch workloads up to 100,000 items",
+                "Batch workloads at scale",
                 "Works offline on your own machine",
               ].map((li) => (
                 <li key={li} className="flex items-start gap-2.5">
