@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://arksim.io"),
-  title: "ArkSim — Process simulation, without the six-figure toolset",
+  title: "ArkSim — Light, rapid process simulation for business teams",
   description:
-    "ArkSim is a desktop process simulator for analysts and consultants. Model automation, agents, controls and quality changes, and see the cost and time impact before you commit. A two-hour learning curve — not three months.",
+    "ArkSim is a light, low-cost desktop process simulator for analysts and consultants. Model automation, agents, controls and quality changes for everyday business processes, and see the cost and time impact before you commit. A two-hour learning curve.",
   keywords: [
     "process simulation",
     "discrete event simulation",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "process economics",
   ],
   openGraph: {
-    title: "ArkSim — Process simulation, without the six-figure toolset",
+    title: "ArkSim — Light, rapid process simulation for business teams",
     description:
       "Model process change — automation, agents, controls, quality — and see the cost and time impact in minutes. Free during beta.",
     type: "website",

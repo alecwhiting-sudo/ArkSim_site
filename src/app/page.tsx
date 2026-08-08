@@ -8,7 +8,6 @@ import {
   IconChat,
   IconCheck,
   IconCoins,
-  IconCross,
   IconFlow,
   IconGauge,
   IconGrid,
@@ -54,44 +53,32 @@ const features = [
 const compareRows: {
   label: string;
   ark: string;
-  legacy: string;
-  arkGood?: boolean;
+  other: string;
 }[] = [
   {
-    label: "Price",
-    ark: "Free during beta",
-    legacy: `£${site.competitorPriceLow.toLocaleString()}–${site.competitorPriceHigh.toLocaleString()} per licence`,
-    arkGood: true,
+    label: "Best for",
+    ark: "Everyday business processes — finance, HR, marketing, operations",
+    other: "Complex physical & industrial systems — airports, factories, logistics",
   },
   {
-    label: "Time to first useful model",
+    label: "Modelling depth",
+    ark: "The essentials, focused and fast",
+    other: "Deep, richly detailed, endlessly configurable",
+  },
+  {
+    label: "Learning curve",
     ark: "About two hours",
-    legacy: "Weeks to months of training",
-    arkGood: true,
+    other: "A specialist toolset, worth the investment",
   },
   {
     label: "Setup",
-    ark: "Lightweight app, installs in minutes",
-    legacy: "Heavy install + licence servers",
-    arkGood: true,
+    ark: "Lightweight desktop app",
+    other: "A full simulation studio",
   },
   {
-    label: "Cost & time impact built in",
-    ark: "Baseline vs target, every run",
-    legacy: "Bolt-on or manual",
-    arkGood: true,
-  },
-  {
-    label: "Automation & AI-agent modelling",
-    ark: "First-class, including per-run AI cost",
-    legacy: "Generic resource only",
-    arkGood: true,
-  },
-  {
-    label: "Built for",
-    ark: "Analysts & consultants",
-    legacy: "Simulation specialists",
-    arkGood: true,
+    label: "Cost",
+    ark: "Free during beta",
+    other: `Premium licences (≈£${site.competitorPriceLow.toLocaleString()}–${site.competitorPriceHigh.toLocaleString()})`,
   },
 ];
 
@@ -151,10 +138,11 @@ export default function Home() {
             </h1>
 
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-[var(--muted)]">
-              ArkSim is a process simulator for analysts and consultants. Model
-              automation, AI agents, new controls and quality improvements — and
-              watch the cost and time impact play out in minutes. All the answer,
-              none of the six-figure toolset.
+              ArkSim is a light, rapid process simulator for analysts and
+              consultants. Model automation, AI agents, new controls and quality
+              improvements — and watch the cost and time impact play out in
+              minutes. Right-sized for everyday business processes, at a fraction
+              of the cost.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -221,12 +209,14 @@ export default function Home() {
           answer than a hunch.
         </h2>
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[var(--muted)]">
-          The serious simulation tools can answer it — but they cost thousands
-          per seat and take months to learn, so most teams fall back on a
-          spreadsheet and an average. Averages hide the queues, the rework and
-          the variability that decide whether a change actually pays off. ArkSim
-          gives you a real discrete-event simulation with a learning curve you
-          can clear over a coffee.
+          The specialist simulation platforms can answer it beautifully — but
+          they&rsquo;re built for complex, industrial modelling and the teams who
+          do it full time. For an everyday finance, HR or marketing process,
+          that&rsquo;s more firepower than the question needs, so most teams fall
+          back on a spreadsheet and an average. Averages hide the queues, the
+          rework and the variability that decide whether a change actually pays
+          off. ArkSim gives you a real discrete-event simulation with a learning
+          curve you can clear over a coffee.
         </p>
       </section>
 
@@ -275,9 +265,9 @@ export default function Home() {
       {/* ---------------- Comparison ---------------- */}
       <section id="compare" className="mx-auto max-w-5xl px-5 py-16">
         <SectionHeading
-          kicker="How we compare"
-          title="The power of AnyLogic or Simul8, without the price or the plateau"
-          sub="We love those tools. But for most process questions, they're more than you need — and more than you should pay."
+          kicker="Where ArkSim fits"
+          title="Right-sized simulation for everyday business processes"
+          sub="Tools like AnyLogic and Simul8 are superb — powerful, industrial-strength platforms for modelling complex physical systems. ArkSim is the light, rapid, low-cost option for the processes most teams run day to day."
         />
 
         <div className="card mt-12 overflow-hidden">
@@ -294,7 +284,7 @@ export default function Home() {
                     </span>
                   </th>
                   <th className="p-5 text-base font-medium text-[var(--muted)]">
-                    Legacy simulators
+                    AnyLogic / Simul8
                   </th>
                 </tr>
               </thead>
@@ -302,35 +292,28 @@ export default function Home() {
                 {compareRows.map((r) => (
                   <tr
                     key={r.label}
-                    className="border-b border-[var(--border)] last:border-0"
+                    className="border-b border-[var(--border)] last:border-0 align-top"
                   >
-                    <td className="p-5 text-sm text-[var(--muted)]">{r.label}</td>
-                    <td className="p-5">
-                      <span className="inline-flex items-start gap-2 font-medium">
-                        <IconCheck
-                          width={18}
-                          height={18}
-                          className="mt-0.5 shrink-0 text-[var(--accent)]"
-                        />
-                        {r.ark}
-                      </span>
+                    <td className="p-5 text-sm text-[var(--muted-2)]">
+                      {r.label}
                     </td>
-                    <td className="p-5">
-                      <span className="inline-flex items-start gap-2 text-[var(--muted)]">
-                        <IconCross
-                          width={18}
-                          height={18}
-                          className="mt-0.5 shrink-0 text-[var(--muted-2)]"
-                        />
-                        {r.legacy}
-                      </span>
+                    <td className="p-5 font-medium text-[var(--foreground)]">
+                      {r.ark}
                     </td>
+                    <td className="p-5 text-[var(--muted)]">{r.other}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         </div>
+
+        <p className="mx-auto mt-6 max-w-2xl text-center text-sm text-[var(--muted-2)]">
+          Modelling an airport, a factory floor or a national supply chain?
+          Those platforms are exactly what you want. For an everyday finance, HR
+          or marketing process, ArkSim gets you a credible answer in an
+          afternoon.
+        </p>
       </section>
 
       {/* ---------------- Roadmap ---------------- */}
