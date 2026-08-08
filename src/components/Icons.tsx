@@ -128,6 +128,47 @@ export function IconArrow(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+export function IconDownload(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base(props)}>
+      <path d="M12 3v12M7 10l5 5 5-5" />
+      <path d="M4 20h16" />
+    </svg>
+  );
+}
+
+/** Apple logo (filled — brand marks read better solid than stroked). */
+export function IconApple(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M16.36 12.78c-.02-2.02 1.65-2.99 1.72-3.04-.94-1.37-2.4-1.56-2.92-1.58-1.24-.13-2.43.73-3.06.73-.63 0-1.6-.71-2.64-.69-1.36.02-2.61.79-3.31 2-1.41 2.45-.36 6.08 1.01 8.07.67.97 1.47 2.06 2.51 2.02 1.01-.04 1.39-.65 2.61-.65 1.22 0 1.56.65 2.63.63 1.09-.02 1.78-.99 2.44-1.97.77-1.13 1.09-2.22 1.11-2.28-.02-.01-2.13-.82-2.15-3.24ZM14.38 6.85c.56-.68.94-1.62.83-2.56-.81.03-1.79.54-2.37 1.21-.52.6-.98 1.56-.86 2.48.9.07 1.83-.46 2.4-1.13Z" />
+    </svg>
+  );
+}
+
+/** Windows logo (four-pane). */
+export function IconWindows(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M3 5.4 10.5 4.3v7.2H3V5.4ZM11.5 4.15 21 3v8.5h-9.5V4.15ZM3 12.5h7.5v7.2L3 18.6v-6.1ZM11.5 12.5H21V21l-9.5-1.35V12.5Z" />
+    </svg>
+  );
+}
+
 /** ArkSim wordmark glyph: an ark/chevron formed from flowing tokens. */
 export function Logo(props: SVGProps<SVGSVGElement>) {
   return (

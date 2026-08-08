@@ -9,6 +9,7 @@ const LINKS = [
   { href: "#features", label: "Features" },
   { href: "#compare", label: "Compare" },
   { href: "#roadmap", label: "Roadmap" },
+  { href: "#download", label: "Download" },
   { href: "#pricing", label: "Pricing" },
 ];
 

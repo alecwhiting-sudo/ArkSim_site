@@ -1,5 +1,6 @@
 import Nav from "@/components/Nav";
 import FlowSim from "@/components/FlowSim";
+import Download from "@/components/Download";
 import { site } from "@/lib/site";
 import {
   IconArrow,
@@ -381,6 +382,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ---------------- Download ---------------- */}
+      <Download />
 
       {/* ---------------- Pricing ---------------- */}
       <section id="pricing" className="mx-auto max-w-6xl px-5 py-16">

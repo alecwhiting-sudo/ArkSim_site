@@ -21,6 +21,12 @@ Site-wide values live in [`src/lib/site.ts`](./src/lib/site.ts):
 - **`appUrl`** — where every "Try it free" button points. Set this to the live
   app URL. _(Currently a placeholder.)_
 - **`contactEmail`** — used by the "Talk to us" / Contact links.
+- **`downloads`** — desktop (Electron) installer links for the Download section.
+  ArkSim is packaged with electron-builder: macOS gets one universal `.dmg`
+  (Apple Silicon + Intel) and Windows gets one 64-bit `.exe`. The `href`s are
+  _stubs_ — point them at your real release assets (e.g. GitHub Releases). Extra
+  targets (Windows arm64, Linux AppImage/deb) slot in as more entries.
+- **`version`** — shown beside the download buttons.
 
 ## Structure
 
