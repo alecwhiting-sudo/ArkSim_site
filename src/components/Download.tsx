@@ -14,17 +14,14 @@ function detectOS(): OS {
   return "other";
 }
 
-/** Full URLs pass through; local /public paths get the site base path. */
-function resolveHref(href: string): string {
-  return /^https?:\/\//.test(href) ? href : `${basePath}${href}`;
-}
-
 const platforms = [
   {
     key: "mac" as const,
     name: "macOS",
     Icon: IconApple,
-    href: resolveHref(site.downloads.mac.href),
+    // Routed through /download/mac (see src/app/download/[platform]/route.ts)
+    // so the button never shows/leaks the underlying GitHub Release URL.
+    href: `${basePath}/download/mac`,
     meta: site.downloads.mac.meta,
     note: site.downloads.mac.note,
   },
@@ -32,7 +29,7 @@ const platforms = [
     key: "windows" as const,
     name: "Windows",
     Icon: IconWindows,
-    href: resolveHref(site.downloads.windows.href),
+    href: `${basePath}/download/windows`,
     meta: site.downloads.windows.meta,
     note: site.downloads.windows.note,
   },
