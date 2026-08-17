@@ -8,6 +8,17 @@ export const dynamic = "force-dynamic";
 const clip = (v: unknown, max: number) => String(v ?? "").trim().slice(0, max);
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
+// Quick health check — reports which env vars are present (never their
+// values). Visit /arksim/api/contact in a browser to check configuration
+// without filling in the form.
+export async function GET() {
+  return NextResponse.json({
+    RESEND_API_KEY: Boolean(process.env.RESEND_API_KEY),
+    CONTACT_TO: Boolean(process.env.CONTACT_TO),
+    CONTACT_FROM: Boolean(process.env.CONTACT_FROM),
+  });
+}
+
 export async function POST(req: Request) {
   let body: Record<string, unknown>;
   try {
@@ -40,8 +51,11 @@ export async function POST(req: Request) {
   const from = process.env.CONTACT_FROM || "ArkSim <onboarding@resend.dev>";
 
   if (!apiKey || !to) {
+    const missing = [!apiKey && "RESEND_API_KEY", !to && "CONTACT_TO"]
+      .filter(Boolean)
+      .join(", ");
     return NextResponse.json(
-      { error: "The contact form isn't configured yet." },
+      { error: `The contact form isn't configured yet. Missing: ${missing}.` },
       { status: 503 },
     );
   }
