@@ -1,6 +1,7 @@
 import Nav from "@/components/Nav";
 import FlowSim from "@/components/FlowSim";
 import Download from "@/components/Download";
+import ContactForm from "@/components/ContactForm";
 import { basePath, site } from "@/lib/site";
 import {
   IconArrow,
@@ -407,7 +408,7 @@ export default function Home() {
               Got an idea for the roadmap? We&rsquo;d love to hear it.
             </p>
             <a
-              href={`mailto:${site.contactEmail}?subject=ArkSim%20roadmap%20idea`}
+              href="#contact"
               className="btn-ghost inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm"
             >
               Get in touch
@@ -518,12 +519,24 @@ export default function Home() {
               <IconArrow width={18} height={18} />
             </a>
             <a
-              href={`mailto:${site.contactEmail}`}
+              href="#contact"
               className="btn-ghost inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-base"
             >
               Talk to us
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* ---------------- Contact ---------------- */}
+      <section id="contact" className="mx-auto max-w-2xl px-5 py-16">
+        <SectionHeading
+          kicker="Contact"
+          title="Talk to us"
+          sub="Questions, feedback, or an idea for the roadmap? Send us a note and we'll get back to you."
+        />
+        <div className="mt-10">
+          <ContactForm />
         </div>
       </section>
 
@@ -544,10 +557,7 @@ export default function Home() {
             <a href="#pricing" className="hover:text-[var(--foreground)]">
               Pricing
             </a>
-            <a
-              href={`mailto:${site.contactEmail}`}
-              className="hover:text-[var(--foreground)]"
-            >
+            <a href="#contact" className="hover:text-[var(--foreground)]">
               Contact
             </a>
           </div>

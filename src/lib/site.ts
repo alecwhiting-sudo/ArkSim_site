@@ -1,22 +1,22 @@
 /**
  * Base path the site is served under. Must match `basePath` in next.config.ts.
- * Used to resolve links to files in /public (e.g. the installers) so they work
- * on GitHub Pages, where the site lives under /ArkSim_site.
+ * Empty on Vercel (served at the domain root); set NEXT_PUBLIC_BASE_PATH only
+ * when hosting under a sub-path.
  */
-export const basePath =
-  process.env.NEXT_PUBLIC_BASE_PATH ??
-  (process.env.NODE_ENV === "production" ? "/ArkSim_site" : "");
+export const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 /**
  * Central site configuration.
  *
  * Update these values in one place. ArkSim is a downloadable desktop app, so the
  * primary calls to action point at the Download section (see `downloads` below).
+ * The contact email is intentionally NOT stored here — the contact form posts to
+ * a serverless function that reads the recipient from a server-side env var, so
+ * the address never reaches the browser.
  */
 export const site = {
   name: "ArkSim",
   tagline: "Simulate process change before you commit to it.",
-  contactEmail: "hello@arksim.io",
   // Rough per-license price of the specialist platforms (GBP), used in copy.
   competitorPriceLow: 2000,
   competitorPriceHigh: 8000,
