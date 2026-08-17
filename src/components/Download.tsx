@@ -31,6 +31,7 @@ const platforms = [
     href: `${basePath}/download/mac`,
     meta: site.downloads.mac.meta,
     note: site.downloads.mac.note,
+    helpSteps: undefined as readonly string[] | undefined,
   },
   {
     key: "windows" as const,
@@ -39,6 +40,7 @@ const platforms = [
     href: `${basePath}/download/windows`,
     meta: site.downloads.windows.meta,
     note: site.downloads.windows.note,
+    helpSteps: site.downloads.windows.helpSteps as readonly string[] | undefined,
   },
 ];
 
@@ -150,45 +152,59 @@ export default function Download() {
           {platforms.map((p) => {
             const recommended = os === p.key;
             return (
-              <a
+              <div
                 key={p.key}
-                href={p.href}
                 className={`card card-hover flex flex-col items-center gap-3 p-8 text-center ${
                   recommended ? "!border-[var(--accent)]" : ""
                 }`}
               >
-                <span
-                  className={`inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-[var(--border-strong)] bg-white/[0.03] ${
-                    recommended ? "text-[var(--accent)]" : "text-[var(--foreground)]"
-                  }`}
-                >
-                  <p.Icon width={28} height={28} />
-                </span>
-
-                <div className="flex items-center gap-2">
-                  <span className="text-lg font-semibold">
-                    Download for {p.name}
+                <a href={p.href} className="flex w-full flex-col items-center gap-3">
+                  <span
+                    className={`inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-[var(--border-strong)] bg-white/[0.03] ${
+                      recommended ? "text-[var(--accent)]" : "text-[var(--foreground)]"
+                    }`}
+                  >
+                    <p.Icon width={28} height={28} />
                   </span>
-                  {recommended && (
-                    <span className="rounded-full bg-[var(--accent)]/15 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-[var(--accent)]">
-                      Detected
+
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg font-semibold">
+                      Download for {p.name}
+                    </span>
+                    {recommended && (
+                      <span className="rounded-full bg-[var(--accent)]/15 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-[var(--accent)]">
+                        Detected
+                      </span>
+                    )}
+                  </div>
+
+                  <span className="text-xs text-[var(--muted-2)]">{p.meta}</span>
+
+                  <span className="btn-primary mt-2 inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm">
+                    Download
+                    <IconArrow width={16} height={16} />
+                  </span>
+
+                  {p.note && (
+                    <span className="mt-1 max-w-[15rem] text-xs leading-relaxed text-[var(--muted-2)]">
+                      {p.note}
                     </span>
                   )}
-                </div>
+                </a>
 
-                <span className="text-xs text-[var(--muted-2)]">{p.meta}</span>
-
-                <span className="btn-primary mt-2 inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm">
-                  Download
-                  <IconArrow width={16} height={16} />
-                </span>
-
-                {p.note && (
-                  <span className="mt-1 max-w-[15rem] text-xs leading-relaxed text-[var(--muted-2)]">
-                    {p.note}
-                  </span>
+                {p.helpSteps && (
+                  <details className="mt-1 w-full text-left">
+                    <summary className="cursor-pointer text-center text-xs text-[var(--muted-2)] underline decoration-dotted underline-offset-4 hover:text-[var(--foreground)]">
+                      Trouble opening it?
+                    </summary>
+                    <ol className="mt-2.5 list-decimal space-y-2 pl-4 text-xs leading-relaxed text-[var(--muted-2)]">
+                      {p.helpSteps.map((step) => (
+                        <li key={step}>{step}</li>
+                      ))}
+                    </ol>
+                  </details>
                 )}
-              </a>
+              </div>
             );
           })}
         </div>

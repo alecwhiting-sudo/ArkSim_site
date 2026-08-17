@@ -59,8 +59,15 @@ export const site = {
     windows: {
       href: "/downloads/ArkSim-Setup-0.1.0.exe",
       meta: "64-bit installer · Windows 10 & 11",
-      // Shown under the Windows button until the app is code-signed.
-      note: "Windows may warn that the publisher isn't recognised — click “More info”, then “Run anyway”.",
+      note: "Unsigned build — your browser and Windows will both ask you to confirm before it opens.",
+      // Shown as an expandable "having trouble?" guide until the app is
+      // code-signed. Two separate, unrelated warnings people commonly hit:
+      // the browser's own download-reputation check, then Windows SmartScreen
+      // when the installer is actually run.
+      helpSteps: [
+        "In your browser's downloads, the file may show as blocked or “not commonly downloaded.” Click the small ⌄ arrow next to it and choose “Keep” (you may need to confirm “Keep anyway”).",
+        "When you open ArkSim, Windows will likely show “Windows protected your PC.” Click “More info,” then “Run anyway.”",
+      ],
     },
   },
 } as const;
