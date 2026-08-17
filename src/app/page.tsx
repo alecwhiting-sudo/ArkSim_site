@@ -328,7 +328,7 @@ export default function Home() {
         <SectionHeading
           kicker="Where ArkSim fits"
           title="Right-sized simulation for everyday business processes"
-          sub="The specialist simulation platforms are superb — powerful, industrial-strength tools for modelling complex physical systems. ArkSim is the light, rapid, low-cost option for the processes most teams run day to day."
+          sub="There are well-established specialist simulation platforms on the market (we won't name them) — they're superb, powerful, and can model highly complex systems. ArkSim is a much simpler, lighter option that still lets you capture many of the processes a company runs — especially service industries and non-physical, office-based processes."
         />
 
         <div className="card mt-12 overflow-hidden">
