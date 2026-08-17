@@ -3,11 +3,15 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * Animated hero visualisation: a small business process with discrete "tokens
- * of light" flowing through it — the same metaphor ArkSim uses in the app.
- * Purely decorative. Falls back to a static frame when the user prefers
- * reduced motion.
+ * Animated hero visualisation: the SAME process shown Before vs After a
+ * redesign, auto-transitioning between the two.
+ *   - Before (baseline): more steps, extra rework loops, slower token flow.
+ *   - After (target): a simpler path, no rework, faster flow.
+ * Purely decorative. Clicking the Baseline/Target toggle takes manual control;
+ * respects prefers-reduced-motion (renders a static "before" frame).
  */
+
+type Mode = "before" | "after";
 
 type Node = {
   id: string;
@@ -16,6 +20,7 @@ type Node = {
   w: number;
   label: string;
   kind: "activity" | "decision" | "control" | "end";
+  beforeOnly?: boolean;
 };
 
 const NODES: Node[] = [
@@ -23,7 +28,15 @@ const NODES: Node[] = [
   { id: "check", x: 214, y: 185, w: 110, label: "Check", kind: "decision" },
   { id: "work", x: 384, y: 110, w: 104, label: "Do work", kind: "activity" },
   { id: "qa", x: 540, y: 110, w: 116, label: "Quality", kind: "control" },
-  { id: "info", x: 384, y: 262, w: 116, label: "Request info", kind: "activity" },
+  {
+    id: "info",
+    x: 384,
+    y: 262,
+    w: 116,
+    label: "Request info",
+    kind: "activity",
+    beforeOnly: true,
+  },
   { id: "done", x: 636, y: 262, w: 92, label: "Finalize", kind: "end" },
 ];
 
@@ -34,34 +47,39 @@ function n(id: string) {
   return { x: node.x, y: node.y };
 }
 
-// Edges as ordered point lists (support a mid control point for curves).
-type Edge = { pts: { x: number; y: number }[]; dashed?: boolean };
+type Edge = {
+  pts: { x: number; y: number }[];
+  dashed?: boolean;
+  beforeOnly?: boolean;
+};
 
 const EDGES: Edge[] = [
+  // Spine — present in both.
   { pts: [n("intake"), n("check")] },
   { pts: [n("check"), n("work")] },
-  { pts: [n("check"), n("info")] },
-  { pts: [n("info"), n("work")] },
   { pts: [n("work"), n("qa")] },
-  // rework loop QA -> work (curved above)
-  { pts: [n("qa"), { x: 462, y: 56 }, n("work")], dashed: true },
   { pts: [n("qa"), n("done")] },
+  // Before-only: request-info branch + rework loops.
+  { pts: [n("check"), n("info")], beforeOnly: true },
+  { pts: [n("info"), { x: 300, y: 300 }, n("check")], dashed: true, beforeOnly: true },
+  { pts: [n("qa"), { x: 462, y: 54 }, n("work")], dashed: true, beforeOnly: true },
 ];
 
-// Routes the blobs travel (sequences of node ids).
-const ROUTES: string[][] = [
-  ["intake", "check", "work", "qa", "done"],
-  ["intake", "check", "info", "work", "qa", "done"],
-  ["intake", "check", "work", "qa", "work", "qa", "done"], // rework
-];
+// Blob routes (sequences of node ids).
+const HAPPY = ["intake", "check", "work", "qa", "done"];
+const ROUTE_INFO = ["intake", "check", "info", "check", "work", "qa", "done"];
+const ROUTE_REWORK = ["intake", "check", "work", "qa", "work", "qa", "done"];
 
 function routePoints(route: string[]) {
   return route.map((id) => n(id));
 }
 
-// Total length of a polyline and a sampler for a position at param p in [0,1].
 function buildPath(pts: { x: number; y: number }[]) {
-  const segs: { a: { x: number; y: number }; b: { x: number; y: number }; len: number }[] = [];
+  const segs: {
+    a: { x: number; y: number };
+    b: { x: number; y: number };
+    len: number;
+  }[] = [];
   let total = 0;
   for (let i = 0; i < pts.length - 1; i++) {
     const a = pts[i];
@@ -77,7 +95,10 @@ function buildPath(pts: { x: number; y: number }[]) {
       for (const s of segs) {
         if (d <= s.len || s === segs[segs.length - 1]) {
           const t = s.len === 0 ? 0 : d / s.len;
-          return { x: s.a.x + (s.b.x - s.a.x) * t, y: s.a.y + (s.b.y - s.a.y) * t };
+          return {
+            x: s.a.x + (s.b.x - s.a.x) * t,
+            y: s.a.y + (s.b.y - s.a.y) * t,
+          };
         }
         d -= s.len;
       }
@@ -86,45 +107,76 @@ function buildPath(pts: { x: number; y: number }[]) {
   };
 }
 
-type Blob = {
+type BlobDef = {
   path: ReturnType<typeof buildPath>;
-  offset: number; // start phase 0..1
-  speed: number; // fraction per second
+  offset: number;
+  speed: number;
   hue: string;
 };
 
 const HUES = ["var(--accent)", "var(--accent-2)", "var(--accent-3)"];
 
+// Per-mode blob population: before = many + slow + looping; after = fewer + fast + direct.
+function buildDefs(mode: Mode): BlobDef[] {
+  const defs: BlobDef[] = [];
+  if (mode === "before") {
+    const routes = [HAPPY, ROUTE_INFO, ROUTE_REWORK, ROUTE_INFO, ROUTE_REWORK];
+    const count = 10;
+    for (let i = 0; i < count; i++) {
+      const route = routes[i % routes.length];
+      defs.push({
+        path: buildPath(routePoints(route)),
+        offset: (i / count) % 1,
+        speed: 0.045 + (i % 3) * 0.006, // slower
+        hue: HUES[i % HUES.length],
+      });
+    }
+  } else {
+    const count = 6;
+    for (let i = 0; i < count; i++) {
+      defs.push({
+        path: buildPath(routePoints(HAPPY)),
+        offset: (i / count) % 1,
+        speed: 0.14 + (i % 3) * 0.014, // faster
+        hue: HUES[i % HUES.length],
+      });
+    }
+  }
+  return defs;
+}
+
+const CLOCK: Record<Mode, string> = {
+  before: "06:18:40",
+  after: "02:41:10",
+};
+
 export default function FlowSim() {
-  const [blobs, setBlobs] = useState<{ x: number; y: number; hue: string; o: number }[]>([]);
+  const [mode, setMode] = useState<Mode>("before");
+  const [blobs, setBlobs] = useState<
+    { x: number; y: number; hue: string; o: number }[]
+  >([]);
+
   const rafRef = useRef<number | null>(null);
   const startRef = useRef<number | null>(null);
-  const defsRef = useRef<Blob[]>([]);
+  const defsRef = useRef<BlobDef[]>([]);
+  const interacted = useRef(false);
+
+  // Rebuild the blob population whenever the mode changes.
+  useEffect(() => {
+    defsRef.current = buildDefs(mode);
+  }, [mode]);
 
   useEffect(() => {
     const reduce =
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Build a spread of blobs across the three routes.
-    const defs: Blob[] = [];
-    for (let i = 0; i < 9; i++) {
-      const route = ROUTES[i % ROUTES.length];
-      defs.push({
-        path: buildPath(routePoints(route)),
-        offset: (i / 9) % 1,
-        speed: 0.08 + (i % 3) * 0.012,
-        hue: HUES[i % HUES.length],
-      });
-    }
-    defsRef.current = defs;
+    defsRef.current = buildDefs(mode);
 
     if (reduce) {
-      // Static: place each blob at its offset, no animation. Deferred to a
-      // frame so we don't call setState synchronously inside the effect body.
       rafRef.current = requestAnimationFrame(() => {
         setBlobs(
-          defs.map((b) => {
+          defsRef.current.map((b) => {
             const pt = b.path.at(b.offset);
             return { x: pt.x, y: pt.y, hue: b.hue, o: 0.9 };
           }),
@@ -141,7 +193,6 @@ export default function FlowSim() {
       const next = defsRef.current.map((b) => {
         const p = (b.offset + elapsed * b.speed) % 1;
         const pt = b.path.at(p);
-        // Fade in/out near the ends so blobs don't pop.
         const o = Math.min(1, Math.min(p, 1 - p) * 6 + 0.15);
         return { x: pt.x, y: pt.y, hue: b.hue, o };
       });
@@ -150,10 +201,26 @@ export default function FlowSim() {
     };
     rafRef.current = requestAnimationFrame(tick);
 
+    // Auto-transition between before/after until the user takes control.
+    const iv = window.setInterval(() => {
+      if (!interacted.current) {
+        setMode((m) => (m === "before" ? "after" : "before"));
+      }
+    }, 4600);
+
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      window.clearInterval(iv);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const pick = (m: Mode) => {
+    interacted.current = true;
+    setMode(m);
+  };
+
+  const isBefore = mode === "before";
 
   return (
     <div className="card relative w-full overflow-hidden p-3 sm:p-4">
@@ -167,15 +234,44 @@ export default function FlowSim() {
         </span>
         <span className="ml-auto flex items-center gap-2 font-mono text-[11px] text-[var(--muted)]">
           <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--accent)]" />
-          running · sim clock 03:12:40
+          sim clock {CLOCK[mode]}
         </span>
+      </div>
+
+      {/* Before / After toggle */}
+      <div className="mb-3 flex items-center justify-center px-1">
+        <div className="relative inline-grid grid-cols-2 rounded-full border border-[var(--border-strong)] bg-white/[0.03] p-1 text-xs font-medium">
+          <span
+            className="absolute inset-y-1 w-[calc(50%-4px)] rounded-full bg-[var(--accent)]/15 ring-1 ring-[var(--accent)]/40 transition-transform duration-500"
+            style={{ transform: isBefore ? "translateX(4px)" : "translateX(calc(100% + 4px))" }}
+            aria-hidden
+          />
+          <button
+            type="button"
+            onClick={() => pick("before")}
+            className={`relative z-10 rounded-full px-4 py-1 transition-colors ${
+              isBefore ? "text-[var(--accent)]" : "text-[var(--muted)]"
+            }`}
+          >
+            Baseline
+          </button>
+          <button
+            type="button"
+            onClick={() => pick("after")}
+            className={`relative z-10 rounded-full px-4 py-1 transition-colors ${
+              !isBefore ? "text-[var(--accent)]" : "text-[var(--muted)]"
+            }`}
+          >
+            Target
+          </button>
+        </div>
       </div>
 
       <svg
         viewBox="0 0 720 360"
         className="w-full"
         role="img"
-        aria-label="Animated diagram of a business process with work items flowing through it"
+        aria-label="Animated diagram comparing a business process before and after redesign, with work items flowing through it"
       >
         <defs>
           <radialGradient id="blobGrad" cx="50%" cy="50%" r="50%">
@@ -204,17 +300,22 @@ export default function FlowSim() {
               e.pts.length === 3
                 ? `M ${e.pts[0].x} ${e.pts[0].y} Q ${e.pts[1].x} ${e.pts[1].y} ${e.pts[2].x} ${e.pts[2].y}`
                 : `M ${e.pts[0].x} ${e.pts[0].y} L ${e.pts[1].x} ${e.pts[1].y}`;
+            const hidden = e.beforeOnly && !isBefore;
             return (
               <path
                 key={i}
                 d={d}
                 strokeDasharray={e.dashed ? "5 6" : undefined}
+                style={{
+                  opacity: hidden ? 0 : 1,
+                  transition: "opacity 0.55s ease",
+                }}
               />
             );
           })}
         </g>
 
-        {/* blobs (drawn under nodes so nodes stay readable) */}
+        {/* blobs */}
         <g filter="url(#softGlow)">
           {blobs.map((b, i) => (
             <circle
@@ -223,7 +324,6 @@ export default function FlowSim() {
               cy={b.y}
               r={7}
               fill="url(#blobGrad)"
-              color={b.hue}
               opacity={b.o}
               style={{ color: b.hue }}
             />
@@ -241,8 +341,12 @@ export default function FlowSim() {
                   : node.kind === "control"
                     ? "var(--accent-3)"
                     : "rgba(255,255,255,0.28)";
+            const hidden = node.beforeOnly && !isBefore;
             return (
-              <g key={node.id}>
+              <g
+                key={node.id}
+                style={{ opacity: hidden ? 0 : 1, transition: "opacity 0.55s ease" }}
+              >
                 <rect
                   x={node.x - node.w / 2}
                   y={node.y - NODE_H / 2}
@@ -270,17 +374,32 @@ export default function FlowSim() {
         </g>
       </svg>
 
-      {/* mini cost readout */}
+      {/* cost readout — highlights the active side */}
       <div className="mt-3 grid grid-cols-3 gap-2 px-1 font-mono text-[11px]">
-        <div className="rounded-lg border border-[var(--border)] bg-white/[0.02] px-3 py-2">
+        <div
+          className="rounded-lg border bg-white/[0.02] px-3 py-2 transition-colors duration-500"
+          style={{
+            borderColor: isBefore ? "var(--accent)" : "var(--border)",
+            opacity: isBefore ? 1 : 0.55,
+          }}
+        >
           <div className="text-[var(--muted-2)]">Baseline</div>
           <div className="text-sm text-[var(--foreground)]">£48,900</div>
         </div>
-        <div className="rounded-lg border border-[var(--border)] bg-white/[0.02] px-3 py-2">
+        <div
+          className="rounded-lg border bg-white/[0.02] px-3 py-2 transition-colors duration-500"
+          style={{
+            borderColor: !isBefore ? "var(--accent)" : "var(--border)",
+            opacity: !isBefore ? 1 : 0.55,
+          }}
+        >
           <div className="text-[var(--muted-2)]">Target</div>
           <div className="text-sm text-[var(--accent)]">£19,300</div>
         </div>
-        <div className="rounded-lg border border-[var(--border)] bg-white/[0.02] px-3 py-2">
+        <div
+          className="rounded-lg border border-[var(--border)] bg-white/[0.02] px-3 py-2 transition-opacity duration-500"
+          style={{ opacity: !isBefore ? 1 : 0.55 }}
+        >
           <div className="text-[var(--muted-2)]">Saving</div>
           <div className="text-sm text-[var(--accent)]">−61%</div>
         </div>
