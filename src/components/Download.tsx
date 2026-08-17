@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { site } from "@/lib/site";
+import { basePath, site } from "@/lib/site";
 import { IconApple, IconArrow, IconWindows } from "@/components/Icons";
 
 type OS = "mac" | "windows" | "other";
@@ -14,20 +14,27 @@ function detectOS(): OS {
   return "other";
 }
 
+/** Full URLs pass through; local /public paths get the site base path. */
+function resolveHref(href: string): string {
+  return /^https?:\/\//.test(href) ? href : `${basePath}${href}`;
+}
+
 const platforms = [
   {
     key: "mac" as const,
     name: "macOS",
     Icon: IconApple,
-    href: site.downloads.mac.href,
+    href: resolveHref(site.downloads.mac.href),
     meta: site.downloads.mac.meta,
+    note: site.downloads.mac.note,
   },
   {
     key: "windows" as const,
     name: "Windows",
     Icon: IconWindows,
-    href: site.downloads.windows.href,
+    href: resolveHref(site.downloads.windows.href),
     meta: site.downloads.windows.meta,
+    note: site.downloads.windows.note,
   },
 ];
 
@@ -90,6 +97,12 @@ export default function Download() {
                 Download
                 <IconArrow width={16} height={16} />
               </span>
+
+              {p.note && (
+                <span className="mt-1 max-w-[15rem] text-xs leading-relaxed text-[var(--muted-2)]">
+                  {p.note}
+                </span>
+              )}
             </a>
           );
         })}

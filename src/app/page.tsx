@@ -10,9 +10,7 @@ import {
   IconCoins,
   IconFlow,
   IconGauge,
-  IconGrid,
   IconRepeat,
-  IconSpark,
   IconUsers,
   Logo,
 } from "@/components/Icons";
@@ -67,7 +65,7 @@ const compareRows: {
   },
   {
     label: "Learning curve",
-    ark: "About two hours",
+    ark: "About 30 minutes",
     other: "A specialist toolset, worth the investment",
   },
   {
@@ -100,23 +98,6 @@ const steps = [
   },
 ];
 
-const roadmap = [
-  {
-    icon: IconChat,
-    title: "Chat to build & change models",
-    body: "Describe the process — or the change you're considering — in plain language and let ArkSim shape the model with you.",
-  },
-  {
-    icon: IconGrid,
-    title: "From a process map or spreadsheet",
-    body: "Import an existing process map or a spreadsheet of steps and volumes, and get a running simulation to refine rather than a blank page.",
-  },
-  {
-    icon: IconSpark,
-    title: "From workshop output",
-    body: "Turn the flipcharts and sticky notes from a discovery workshop straight into a first-cut model — capturing the room's thinking while it's fresh.",
-  },
-];
 
 export default function Home() {
   return (
@@ -139,7 +120,7 @@ export default function Home() {
 
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-[var(--muted)]">
               ArkSim is a light, rapid process simulator for analysts and
-              consultants. Model automation, AI agents, new controls and quality
+              architects. Model automation, AI agents, new controls and quality
               improvements — and watch the cost and time impact play out in
               minutes. Right-sized for everyday business processes, at a fraction
               of the cost.
@@ -164,7 +145,7 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap gap-x-7 gap-y-2 text-sm text-[var(--muted-2)]">
               <span className="inline-flex items-center gap-2">
                 <IconCheck width={16} height={16} className="text-[var(--accent)]" />
-                Two-hour learning curve
+                30-minute learning curve
               </span>
               <span className="inline-flex items-center gap-2">
                 <IconCheck width={16} height={16} className="text-[var(--accent)]" />
@@ -320,24 +301,39 @@ export default function Home() {
       <section id="roadmap" className="mx-auto max-w-6xl px-5 py-16">
         <SectionHeading
           kicker="On the roadmap"
-          title="Soon: go from a conversation to a simulation"
-          sub="The engine is here today. Next, we're removing the data entry — so building a model is as quick as describing the process."
+          title="Coming soon: chat with your process"
+          sub="Building from a process map, a spreadsheet or workshop output already works today. Next up: shaping a model just by describing it."
         />
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
-          {roadmap.map((r) => (
-            <div key={r.title} className="card card-hover relative p-7">
-              <span className="absolute right-5 top-5 rounded-full border border-[var(--border-strong)] px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-[var(--muted-2)]">
-                Coming soon
-              </span>
-              <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--border-strong)] bg-white/[0.03] text-[var(--accent-3)]">
-                <r.icon width={22} height={22} />
-              </div>
-              <h3 className="mt-4 text-lg font-semibold">{r.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
-                {r.body}
-              </p>
+
+        <div className="mx-auto mt-12 max-w-2xl">
+          <div className="card relative p-8 sm:p-10">
+            <span className="absolute right-6 top-6 rounded-full border border-[var(--border-strong)] px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-[var(--muted-2)]">
+              Coming soon
+            </span>
+            <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-[var(--border-strong)] bg-white/[0.03] text-[var(--accent-3)]">
+              <IconChat width={24} height={24} />
             </div>
-          ))}
+            <h3 className="mt-4 text-xl font-semibold">Chat with your process</h3>
+            <p className="mt-2.5 leading-relaxed text-[var(--muted)]">
+              Describe the process — or the change you&rsquo;re weighing up — in
+              plain language, and let ArkSim build and adjust the model with you.
+              No forms, no fiddly data entry: a conversation that ends in a
+              running simulation.
+            </p>
+          </div>
+
+          <div className="mt-8 flex flex-col items-center gap-3 text-center">
+            <p className="text-[var(--muted)]">
+              Got an idea for the roadmap? We&rsquo;d love to hear it.
+            </p>
+            <a
+              href={`mailto:${site.contactEmail}?subject=ArkSim%20roadmap%20idea`}
+              className="btn-ghost inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm"
+            >
+              Get in touch
+              <IconArrow width={16} height={16} />
+            </a>
+          </div>
         </div>
       </section>
 
@@ -354,12 +350,12 @@ export default function Home() {
             </p>
           </div>
           <div className="card p-8">
-            <h3 className="text-xl font-semibold">For consultants</h3>
+            <h3 className="text-xl font-semibold">For architects</h3>
             <p className="mt-3 leading-relaxed text-[var(--muted)]">
-              Walk into the room and model the client&rsquo;s process live.
-              Pressure-test the automation and agentic scenarios on the spot, and
-              leave with a business case you built together — not a promise to
-              &ldquo;run the numbers later&rdquo;.
+              Prove the target-state design before anyone builds it. Pressure-test
+              your automation and agentic options, compare designs on cost and
+              time, and hand over a blueprint backed by numbers — not just a
+              diagram.
             </p>
           </div>
         </div>

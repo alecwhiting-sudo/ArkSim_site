@@ -1,7 +1,7 @@
 # ArkSim — marketing site
 
 Landing page for **ArkSim**, a downloadable desktop discrete-event process
-simulator for business analysts and consultants. Built with Next.js (App Router),
+simulator for business analysts and architects. Built with Next.js (App Router),
 TypeScript and Tailwind CSS v4 — mirroring the [ArkSim app](https://github.com/alecwhiting-sudo/ArkSim)
 stack.
 

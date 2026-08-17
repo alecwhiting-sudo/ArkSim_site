@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://arksim.io"),
   title: "ArkSim — Light, rapid process simulation for business teams",
   description:
-    "ArkSim is a light, low-cost desktop process simulator for analysts and consultants. Model automation, agents, controls and quality changes for everyday business processes, and see the cost and time impact before you commit. A two-hour learning curve.",
+    "ArkSim is a light, low-cost desktop process simulator for analysts and architects. Model automation, agents, controls and quality changes for everyday business processes, and see the cost and time impact before you commit. A 30-minute learning curve.",
   keywords: [
     "process simulation",
     "discrete event simulation",
