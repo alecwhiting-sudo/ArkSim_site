@@ -57,16 +57,18 @@ export const site = {
       note: "Signed, notarised and stapled — opens without a security warning.",
     },
     windows: {
-      href: "/downloads/ArkSim-Setup-0.1.0.exe",
-      meta: "64-bit installer · Windows 10 & 11",
-      note: "Unsigned build — your browser and Windows will both ask you to confirm before it opens.",
+      // Hosted as a GitHub Release asset (over the web-upload UI's 25 MB cap).
+      href: "https://github.com/alecwhiting-sudo/ArkSim_site/releases/download/v0.1.0-windows/ArkSim.Setup.0.1.0.zip",
+      meta: "64-bit installer (.zip) · Windows 10 & 11",
+      note: "Downloads as a .zip — extract it to get the installer. Unsigned build: your browser and Windows will each ask you to confirm before it opens.",
       // Shown as an expandable "having trouble?" guide until the app is
-      // code-signed. Two separate, unrelated warnings people commonly hit:
-      // the browser's own download-reputation check, then Windows SmartScreen
-      // when the installer is actually run.
+      // code-signed. Three things people commonly hit, in the order they meet
+      // them: the browser's own download-reputation check, extracting the zip,
+      // then Windows SmartScreen when the installer is actually run.
       helpSteps: [
         "In your browser's downloads, the file may show as blocked or “not commonly downloaded.” Click the small ⌄ arrow next to it and choose “Keep” (you may need to confirm “Keep anyway”).",
-        "When you open ArkSim, Windows will likely show “Windows protected your PC.” Click “More info,” then “Run anyway.”",
+        "Extract the .zip (right-click → “Extract All,” or just double-click it) to get ArkSim.Setup.0.1.0.exe.",
+        "Run the installer. Windows will likely show “Windows protected your PC.” Click “More info,” then “Run anyway.”",
       ],
     },
   },
