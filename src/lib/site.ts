@@ -27,28 +27,24 @@ export const site = {
   /**
    * Desktop downloads (Electron-wrapped app).
    *
-   * One installer per platform:
-   *   - macOS  → a `.dmg` (build it as a *universal* binary and a single file
-   *     covers both Apple Silicon and Intel Macs).
-   *   - Windows → an NSIS `.exe` installer (64-bit).
-   *
    * WHERE TO PUT THE FILES — two options:
-   *   1. Drop them in `public/downloads/` and keep the paths below. They'll be
-   *      served from the site. NOTE: GitHub blocks files larger than 100 MB in a
-   *      normal git push, so this only works if each installer is under ~100 MB.
-   *   2. For larger installers (typical for Electron), attach them to a GitHub
-   *      Release and paste the release-asset URLs here instead (a full https://
-   *      URL is used as-is; a leading-slash path is treated as a local file).
+   *   1. Drop them in `public/downloads/` and use a leading-slash path below.
+   *      They'll be served from the site. NOTE: GitHub blocks files larger than
+   *      100 MB in a normal git push, so this only works under that size.
+   *   2. For larger installers (typical for Electron — mac is currently ~350 MB),
+   *      attach them to a GitHub Release instead and paste the release-asset URL
+   *      here (a full https:// URL is used as-is).
    *
-   * Update the version in the filenames to match `version` above. Extra targets
-   * (Windows arm64, Linux AppImage/deb) can be added as more entries.
+   * Current mac build: hosted as a GitHub Release asset (see the `v0.1.0-mac`
+   * release). To publish a new version: draft a new release, upload the file,
+   * copy its asset URL, and update `href` + `version` below to match.
    */
   downloads: {
     mac: {
-      // Universal build → works on Apple Silicon and Intel.
-      href: "/downloads/ArkSim-0.1.0-universal.dmg",
-      meta: "Universal (Apple Silicon + Intel) · macOS 11+",
-      note: "",
+      // Hosted as a GitHub Release asset (too large for a normal git push).
+      href: "https://github.com/alecwhiting-sudo/ArkSim_site/releases/download/v0.1.0-mac/ArkSim.app.zip",
+      meta: "macOS · signed & notarised by Apple",
+      note: "Signed, notarised and stapled — opens without a security warning.",
     },
     windows: {
       href: "/downloads/ArkSim-Setup-0.1.0.exe",
