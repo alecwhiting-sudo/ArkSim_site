@@ -132,12 +132,12 @@ function buildDefs(mode: Mode): BlobDef[] {
       });
     }
   } else {
-    const count = 6;
+    const count = 9; // +50% vs before (was 6)
     for (let i = 0; i < count; i++) {
       defs.push({
         path: buildPath(routePoints(HAPPY)),
         offset: (i / count) % 1,
-        speed: 0.14 + (i % 3) * 0.014, // faster
+        speed: 0.182 + (i % 3) * 0.018, // +30% faster
         hue: HUES[i % HUES.length],
       });
     }

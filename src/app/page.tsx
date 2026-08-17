@@ -1,7 +1,7 @@
 import Nav from "@/components/Nav";
 import FlowSim from "@/components/FlowSim";
 import Download from "@/components/Download";
-import { site } from "@/lib/site";
+import { basePath, site } from "@/lib/site";
 import {
   IconArrow,
   IconBolt,
@@ -97,7 +97,41 @@ const steps = [
     body: "Watch work flow through in real time, then read off the baseline-vs-target cost and time. Change one assumption, run again, and defend the number.",
   },
 ];
-
+// Product tour — screenshots live in public/app_screenshots/ (see the README
+// there). Replace the placeholder files with real captures; keep the filenames.
+const screenshots = [
+  {
+    file: "feature-1-import.png",
+    title: "Turn any input into a simulation",
+    body: "Use your own AI to convert workshop flipcharts, spreadsheets or photos into a working model — with the structured prompts we provide.",
+  },
+  {
+    file: "feature-2-levers.png",
+    title: "Adjust from the baseline",
+    body: "Pull levers — simplification, centralisation, automation, agents — and watch each one reshape the model.",
+  },
+  {
+    file: "feature-3-visualise.png",
+    title: "Auto-visualise your process",
+    body: "Lay the whole process out in seconds with a range of auto-draw functions.",
+  },
+  {
+    file: "feature-4-simulate.gif",
+    title: "Simulate the process",
+    body: "Watch work flow through in real time — resources, queues and rework included.",
+    animated: true,
+  },
+  {
+    file: "feature-5-results.png",
+    title: "Review the results",
+    body: "Read off throughput, cost and time, baseline against target.",
+  },
+  {
+    file: "feature-6-export.png",
+    title: "Export the results",
+    body: "Send everything to Excel or JSON for reporting and sign-off.",
+  },
+];
 
 export default function Home() {
   return (
@@ -158,9 +192,14 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative animate-[float-slow_9s_ease-in-out_infinite]">
-            <div className="pointer-events-none absolute -inset-6 -z-10 rounded-[2rem] bg-[radial-gradient(50%_50%_at_50%_40%,rgba(56,225,200,0.18),transparent_70%)]" />
-            <FlowSim />
+          <div>
+            <div className="relative animate-[float-slow_9s_ease-in-out_infinite]">
+              <div className="pointer-events-none absolute -inset-6 -z-10 rounded-[2rem] bg-[radial-gradient(50%_50%_at_50%_40%,rgba(56,225,200,0.18),transparent_70%)]" />
+              <FlowSim />
+            </div>
+            <p className="mt-3 text-center text-xs text-[var(--muted-2)]">
+              Illustrative visualisation — not actual app output.
+            </p>
           </div>
         </div>
       </section>
@@ -221,10 +260,48 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------------- Features ---------------- */}
+      {/* ---------------- Key features (screenshots) ---------------- */}
+      <section id="key-features" className="mx-auto max-w-6xl px-5 py-16">
+        <SectionHeading
+          kicker="Key features"
+          title="See ArkSim in action"
+          sub="Six steps from raw inputs to a defensible business case."
+        />
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
+          {screenshots.map((s, i) => (
+            <figure key={s.file} className="card card-hover overflow-hidden">
+              <div className="relative aspect-[16/10] border-b border-[var(--border)] bg-[var(--surface-2)]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`${basePath}/app_screenshots/${s.file}`}
+                  alt={s.title}
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
+                <span className="absolute left-3 top-3 inline-flex h-7 w-7 items-center justify-center rounded-full bg-[var(--background)]/80 font-mono text-xs font-semibold text-[var(--accent)] ring-1 ring-[var(--border-strong)] backdrop-blur">
+                  {i + 1}
+                </span>
+                {s.animated && (
+                  <span className="absolute right-3 top-3 rounded-full bg-[var(--background)]/80 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-[var(--muted)] ring-1 ring-[var(--border-strong)] backdrop-blur">
+                    Live demo
+                  </span>
+                )}
+              </div>
+              <figcaption className="p-6">
+                <h3 className="text-lg font-semibold">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
+                  {s.body}
+                </p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      {/* ---------------- Capabilities ---------------- */}
       <section id="features" className="mx-auto max-w-6xl px-5 py-16">
         <SectionHeading
-          kicker="Features"
+          kicker="Capabilities"
           title="A real simulation engine, minus the complexity"
           sub="Everything you need to model the messy reality of a process — and nothing you don't."
         />

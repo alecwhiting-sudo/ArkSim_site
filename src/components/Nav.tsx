@@ -5,7 +5,7 @@ import { Logo } from "@/components/Icons";
 
 const LINKS = [
   { href: "#how", label: "How it works" },
-  { href: "#features", label: "Features" },
+  { href: "#key-features", label: "Key features" },
   { href: "#compare", label: "Compare" },
   { href: "#roadmap", label: "Roadmap" },
   { href: "#download", label: "Download" },
