@@ -6,6 +6,16 @@
 export const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/arksim";
 
 /**
+ * Cookie set by /api/download-lead once a visitor has submitted their email;
+ * checked by the download redirect route before serving a real file, and read
+ * client-side by the Download component to decide whether to show the gate.
+ * Not cryptographically signed — this is a lead-capture gate, not access
+ * control, so a client-set cookie is an acceptable tradeoff for staying
+ * dependency-free.
+ */
+export const DOWNLOAD_UNLOCK_COOKIE = "arksim_dl_ok";
+
+/**
  * Central site configuration.
  *
  * Update these values in one place. ArkSim is a downloadable desktop app, so the
