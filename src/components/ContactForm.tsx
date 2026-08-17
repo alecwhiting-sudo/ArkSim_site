@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { basePath } from "@/lib/site";
 import { IconArrow, IconCheck } from "@/components/Icons";
 
 type Status = "idle" | "sending" | "sent" | "error";
@@ -23,7 +24,7 @@ export default function ContactForm() {
     setStatus("sending");
     setError("");
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(`${basePath}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

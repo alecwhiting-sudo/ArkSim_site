@@ -1,9 +1,9 @@
 /**
  * Base path the site is served under. Must match `basePath` in next.config.ts.
- * Empty on Vercel (served at the domain root); set NEXT_PUBLIC_BASE_PATH only
- * when hosting under a sub-path.
+ * Served under arkmode.app/arksim, so defaults to "/arksim". Set
+ * NEXT_PUBLIC_BASE_PATH="" to serve at a domain root instead.
  */
-export const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+export const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/arksim";
 
 /**
  * Central site configuration.
