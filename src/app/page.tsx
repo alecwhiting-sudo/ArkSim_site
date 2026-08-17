@@ -270,19 +270,20 @@ export default function Home() {
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {screenshots.map((s, i) => (
             <figure key={s.file} className="card card-hover overflow-hidden">
-              <div className="relative aspect-[16/10] border-b border-[var(--border)] bg-[var(--surface-2)]">
+              <div className="relative border-b border-[var(--border)] bg-[var(--surface-2)] p-3 sm:p-4">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={`${basePath}/app_screenshots/${s.file}`}
                   alt={s.title}
                   loading="lazy"
-                  className="h-full w-full object-cover"
+                  decoding="async"
+                  className="w-full rounded-lg border border-[var(--border)] shadow-lg"
                 />
-                <span className="absolute left-3 top-3 inline-flex h-7 w-7 items-center justify-center rounded-full bg-[var(--background)]/80 font-mono text-xs font-semibold text-[var(--accent)] ring-1 ring-[var(--border-strong)] backdrop-blur">
+                <span className="absolute left-5 top-5 sm:left-6 sm:top-6 inline-flex h-7 w-7 items-center justify-center rounded-full bg-[var(--background)]/80 font-mono text-xs font-semibold text-[var(--accent)] ring-1 ring-[var(--border-strong)] backdrop-blur">
                   {i + 1}
                 </span>
                 {s.animated && (
-                  <span className="absolute right-3 top-3 rounded-full bg-[var(--background)]/80 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-[var(--muted)] ring-1 ring-[var(--border-strong)] backdrop-blur">
+                  <span className="absolute right-5 top-5 sm:right-6 sm:top-6 rounded-full bg-[var(--background)]/80 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-[var(--muted)] ring-1 ring-[var(--border-strong)] backdrop-blur">
                     Live demo
                   </span>
                 )}
