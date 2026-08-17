@@ -269,15 +269,15 @@ export default function Home() {
         />
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {screenshots.map((s, i) => (
-            <figure key={s.file} className="card card-hover overflow-hidden">
-              <div className="border-b border-[var(--border)] bg-[var(--surface-2)] p-3 sm:p-4">
+            <figure key={s.file} className="card card-hover flex h-full flex-col overflow-hidden">
+              <div className="flex aspect-[16/9] items-center justify-center border-b border-[var(--border)] bg-[var(--surface-2)] p-3 sm:p-4">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={`${basePath}/app_screenshots/${s.file}`}
                   alt={s.title}
                   loading="lazy"
                   decoding="async"
-                  className="w-full rounded-lg border border-[var(--border)] shadow-lg"
+                  className="max-h-full max-w-full rounded-lg border border-[var(--border)] shadow-lg"
                 />
               </div>
               <figcaption className="p-6">
