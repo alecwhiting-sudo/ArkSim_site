@@ -5,6 +5,10 @@ simulator for business analysts and architects. Built with Next.js (App Router),
 TypeScript and Tailwind CSS v4 — mirroring the [ArkSim app](https://github.com/alecwhiting-sudo/ArkSim)
 stack.
 
+Live at [arkmode.app/arksim](https://arkmode.app/arksim). For how hosting,
+the domain, email, and downloads are wired up — and the trade-offs behind
+those decisions — see [`DEPLOYMENT.md`](./DEPLOYMENT.md).
+
 ## Run locally
 
 ```bash
@@ -40,10 +44,9 @@ address lives only in the server-side env vars and never reaches the browser.
 
 Site-wide values live in [`src/lib/site.ts`](./src/lib/site.ts):
 
-- **`downloads`** — desktop (Electron) installer links for the Download section.
-  ArkSim is packaged with electron-builder: macOS gets one universal `.dmg`
-  (Apple Silicon + Intel) and Windows gets one 64-bit `.exe`. The `href`s are
-  _stubs_ — point them at your real release assets (e.g. GitHub Releases). Extra
+- **`downloads`** — desktop (Electron) installer links for the Download section,
+  currently pointing at GitHub Release assets on this repo (see
+  [`DEPLOYMENT.md`](./DEPLOYMENT.md#downloads-macos--windows) for why). Extra
   targets (Windows arm64, Linux AppImage/deb) slot in as more entries.
 - **`version`** — shown beside the download buttons.
 
@@ -58,5 +61,9 @@ Site-wide values live in [`src/lib/site.ts`](./src/lib/site.ts):
 | `src/components/Nav.tsx` | Sticky nav with mobile menu |
 | `src/components/Icons.tsx` | Inline icon set + logo |
 | `src/components/ContactForm.tsx` | Contact form (posts to the API route) |
+| `src/components/Download.tsx` | Download section: email gate + platform cards |
 | `src/app/api/contact/route.ts` | Serverless function that emails submissions via Resend |
-| `src/lib/site.ts` | Central config (downloads, positioning) |
+| `src/app/api/download-lead/route.ts` | Serverless function: emails download leads, sets the unlock cookie |
+| `src/app/download/[platform]/route.ts` | Redirects to the real installer, gated behind the unlock cookie |
+| `src/lib/site.ts` | Central config (downloads, positioning, base path) |
+| `DEPLOYMENT.md` | Hosting/domain/email/downloads architecture — the *why*, not just the *what* |
