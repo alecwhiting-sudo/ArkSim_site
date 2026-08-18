@@ -52,7 +52,7 @@ export const site = {
   downloads: {
     mac: {
       // Hosted as a GitHub Release asset (too large for a normal git push).
-      href: "https://github.com/alecwhiting-sudo/ArkSim_site/releases/download/v0.1.0-mac/ArkSim.app.zip",
+      href: "https://github.com/alecwhiting-sudo/ArkSim_site/releases/download/v0.1.0-mac/ArkSim-0.1.0-universal.dmg",
       meta: "macOS · signed & notarised by Apple",
       note: "Signed, notarised and stapled — opens without a security warning.",
     },
