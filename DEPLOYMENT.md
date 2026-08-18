@@ -62,10 +62,17 @@ recipient. None of the following are active:
    a different project's site), and upgrading is $20/mo — judged not worth
    it for this.
 2. **Namecheap free email forwarding**, `hello@arkmode.app →` the owner's
-   Gmail — **this one IS live** (Namecheap → Domain List → arkmode.app →
-   Domain tab → Redirect Email), but it's receive-only. Free forwarding has
-   no SMTP send capability, so it can't be used as a Gmail "send mail as"
-   alias despite looking like it should.
+   Gmail — **this one IS live and confirmed working** (Namecheap → Domain
+   List → arkmode.app → Domain tab → Redirect Email; test email sent to
+   `hello@arkmode.app` was received in Gmail), but it's receive-only. Free
+   forwarding has no SMTP send capability, so it can't be used as a Gmail
+   "send mail as" alias despite looking like it should.
+   - Not currently published anywhere (no `mailto:` links on the site — see
+     the contact-form section above), so it has no real traffic today beyond
+     the odd spam bot dictionary-guessing common prefixes against the
+     domain. Kept live because it's free/zero-maintenance and is exactly the
+     address a future branded-reply setup (see item 4 below) would use — a
+     10-second delete in the same Namecheap panel if it's ever not wanted.
 3. **An existing paid Namecheap Private Email plan** (bought for an
    unrelated project's domain) had spare mailbox capacity, but that plan is
    locked to its original domain — can't add an `arkmode.app` mailbox to it.
