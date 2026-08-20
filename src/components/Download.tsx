@@ -100,7 +100,7 @@ export default function Download() {
         </h2>
         <p className="mt-4 text-lg leading-relaxed text-[var(--muted)]">
           The same simulator as a native desktop app — works offline, launches
-          from your dock or taskbar. Free during beta.
+          from your dock or taskbar. In beta — open to your feedback.
         </p>
       </div>
 
@@ -218,7 +218,7 @@ export default function Download() {
       )}
 
       <p className="mt-6 text-center text-sm text-[var(--muted-2)]">
-        Version {site.version} · Free during beta · macOS &amp; Windows
+        Version {site.version} · Beta · macOS &amp; Windows
       </p>
     </section>
   );

@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ArkSim — Light, rapid process simulation for business teams",
     description:
-      "Model process change — automation, agents, controls, quality — and see the cost and time impact in minutes. Free during beta.",
+      "Model process change — automation, agents, controls, quality — and see the cost and time impact in minutes. Currently in beta.",
     type: "website",
     siteName: "ArkSim",
   },
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "ArkSim — Process simulation made simple",
     description:
-      "Model process change and see the cost and time impact in minutes. Free during beta.",
+      "Model process change and see the cost and time impact in minutes. Currently in beta.",
   },
 };
 

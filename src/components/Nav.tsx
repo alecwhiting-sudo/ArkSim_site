@@ -9,7 +9,7 @@ const LINKS = [
   { href: "#compare", label: "Compare" },
   { href: "#roadmap", label: "Roadmap" },
   { href: "#download", label: "Download" },
-  { href: "#pricing", label: "Pricing" },
+  { href: "#access", label: "Access" },
 ];
 
 export default function Nav() {

@@ -75,8 +75,8 @@ const compareRows: {
     other: "A full simulation studio",
   },
   {
-    label: "Cost",
-    ark: "Free during beta",
+    label: "Access",
+    ark: "Beta — open to feedback",
     other: `Premium licences (≈£${site.competitorPriceLow.toLocaleString()}–${site.competitorPriceHigh.toLocaleString()})`,
   },
 ];
@@ -145,7 +145,7 @@ export default function Home() {
           <div>
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] bg-white/[0.03] px-3 py-1 text-xs text-[var(--muted)]">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-              Live now · Free during beta
+              Beta · Open to feedback
             </div>
 
             <h1 className="text-balance text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
@@ -166,7 +166,7 @@ export default function Home() {
                 href="#download"
                 className="btn-primary inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-base"
               >
-                Download ArkSim — free
+                Download ArkSim
                 <IconArrow width={18} height={18} />
               </a>
               <a
@@ -188,7 +188,7 @@ export default function Home() {
               </span>
               <span className="inline-flex items-center gap-2">
                 <IconCheck width={16} height={16} className="text-[var(--accent)]" />
-                No sales call
+                Open to feedback
               </span>
             </div>
           </div>
@@ -210,7 +210,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 px-5 py-8 text-center sm:grid-cols-3">
           {[
             ["<60 min", "to a working model"],
-            ["£0", "during beta"],
+            ["Beta", "open to feedback"],
             ["3 min", "to illustrate a 30-day close-the-books process"],
           ].map(([big, small]) => (
             <div key={small}>
@@ -445,12 +445,12 @@ export default function Home() {
       {/* ---------------- Download ---------------- */}
       <Download />
 
-      {/* ---------------- Pricing ---------------- */}
-      <section id="pricing" className="mx-auto max-w-6xl px-5 py-16">
+      {/* ---------------- Access ---------------- */}
+      <section id="access" className="mx-auto max-w-6xl px-5 py-16">
         <SectionHeading
-          kicker="Pricing"
-          title="Free while we're in beta"
-          sub="No licence fee, no seat count, no procurement cycle. Use ArkSim on real work today and help shape where it goes next."
+          kicker="Access"
+          title="In beta — open to your feedback"
+          sub="Use ArkSim on real work today, and help shape where it goes next."
         />
 
         <div className="mx-auto mt-12 max-w-lg">
@@ -460,9 +460,9 @@ export default function Home() {
               Beta access
             </div>
             <div className="mt-5 flex items-end gap-2">
-              <span className="text-5xl font-semibold tracking-tight">Free</span>
+              <span className="text-5xl font-semibold tracking-tight">Beta</span>
               <span className="mb-1.5 text-[var(--muted-2)]">
-                / for the whole beta
+                open to your feedback
               </span>
             </div>
             <ul className="mt-6 space-y-3 text-sm">
@@ -487,13 +487,9 @@ export default function Home() {
               href="#download"
               className="btn-primary mt-8 flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base"
             >
-              Download ArkSim — free
+              Download ArkSim
               <IconArrow width={18} height={18} />
             </a>
-            <p className="mt-4 text-center text-xs text-[var(--muted-2)]">
-              When paid plans arrive, they&rsquo;ll stay a fraction of the cost of
-              legacy tools.
-            </p>
           </div>
         </div>
       </section>
@@ -515,7 +511,7 @@ export default function Home() {
               href="#download"
               className="btn-primary inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-base"
             >
-              Download ArkSim free
+              Download ArkSim
               <IconArrow width={18} height={18} />
             </a>
             <a
@@ -554,8 +550,8 @@ export default function Home() {
             <a href="#features" className="hover:text-[var(--foreground)]">
               Features
             </a>
-            <a href="#pricing" className="hover:text-[var(--foreground)]">
-              Pricing
+            <a href="#access" className="hover:text-[var(--foreground)]">
+              Access
             </a>
             <a href="#contact" className="hover:text-[var(--foreground)]">
               Contact
