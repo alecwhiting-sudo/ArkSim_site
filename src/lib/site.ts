@@ -32,7 +32,7 @@ export const site = {
   competitorPriceHigh: 8000,
 
   /** Current desktop app version, shown next to the download buttons. */
-  version: "0.1.0",
+  version: "0.1.1",
 
   /**
    * Desktop downloads (Electron-wrapped app).
@@ -45,20 +45,21 @@ export const site = {
    *      attach them to a GitHub Release instead and paste the release-asset URL
    *      here (a full https:// URL is used as-is).
    *
-   * Current mac build: hosted as a GitHub Release asset (see the `v0.1.0-mac`
-   * release). To publish a new version: draft a new release, upload the file,
-   * copy its asset URL, and update `href` + `version` below to match.
+   * Both builds are hosted as GitHub Release assets (see the `v<version>-mac`
+   * / `v<version>-windows` releases). To publish a new version: update the
+   * release (new tag or edit the existing one), upload the file, copy its
+   * asset URL, and update `href` + `version` below to match.
    */
   downloads: {
     mac: {
       // Hosted as a GitHub Release asset (too large for a normal git push).
-      href: "https://github.com/alecwhiting-sudo/ArkSim_site/releases/download/v0.1.0-mac/ArkSim-0.1.0-universal.dmg",
+      href: "https://github.com/alecwhiting-sudo/ArkSim_site/releases/download/v0.1.1-mac/ArkSim-0.1.1-universal.dmg",
       meta: "macOS · signed & notarised by Apple",
       note: "Signed, notarised and stapled — opens without a security warning.",
     },
     windows: {
       // Hosted as a GitHub Release asset (over the web-upload UI's 25 MB cap).
-      href: "https://github.com/alecwhiting-sudo/ArkSim_site/releases/download/v0.1.0-windows/ArkSim.Setup.0.1.0.zip",
+      href: "https://github.com/alecwhiting-sudo/ArkSim_site/releases/download/v0.1.1-windows/ArkSim.Setup.0.1.1.zip",
       meta: "64-bit installer (.zip) · Windows 10 & 11",
       note: "Downloads as a .zip — extract it to get the installer. Unsigned build: your browser and Windows will each ask you to confirm before it opens.",
       // Shown as an expandable "having trouble?" guide until the app is
@@ -67,7 +68,7 @@ export const site = {
       // then Windows SmartScreen when the installer is actually run.
       helpSteps: [
         "In your browser's downloads, the file may show as blocked or “not commonly downloaded.” Click the small ⌄ arrow next to it and choose “Keep” (you may need to confirm “Keep anyway”).",
-        "Extract the .zip (right-click → “Extract All,” or just double-click it) to get ArkSim.Setup.0.1.0.exe.",
+        "Extract the .zip (right-click → “Extract All,” or just double-click it) to get ArkSim.Setup.0.1.1.exe.",
         "Run the installer. Windows will likely show “Windows protected your PC.” Click “More info,” then “Run anyway.”",
       ],
     },
