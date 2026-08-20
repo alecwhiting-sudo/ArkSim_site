@@ -10,6 +10,7 @@ const LINKS = [
   { href: "#roadmap", label: "Roadmap" },
   { href: "#download", label: "Download" },
   { href: "#access", label: "Access" },
+  { href: "#contact", label: "Contact" },
 ];
 
 export default function Nav() {

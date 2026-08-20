@@ -130,7 +130,7 @@ const screenshots = [
   {
     file: "feature-6-export.png",
     title: "Export the results",
-    body: "Send everything to Excel or JSON for reporting and sign-off.",
+    body: "Send output to Excel or JSON for reporting and sign-off.",
   },
 ];
 
@@ -456,13 +456,10 @@ export default function Home() {
         <div className="mx-auto mt-12 max-w-lg">
           <div className="card relative overflow-hidden p-8">
             <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[radial-gradient(circle,rgba(56,225,200,0.25),transparent_70%)]" />
-            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] bg-white/[0.03] px-3 py-1 text-xs text-[var(--muted)]">
-              Beta access
-            </div>
-            <div className="mt-5 flex items-end gap-2">
+            <div className="flex items-end gap-2">
               <span className="text-5xl font-semibold tracking-tight">Beta</span>
               <span className="mb-1.5 text-[var(--muted-2)]">
-                open to your feedback
+                shaped by early users
               </span>
             </div>
             <ul className="mt-6 space-y-3 text-sm">
@@ -494,36 +491,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------------- Final CTA ---------------- */}
-      <section className="mx-auto max-w-6xl px-5 py-16">
-        <div className="card relative overflow-hidden p-10 text-center sm:p-16">
-          <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_80%_at_50%_0%,rgba(91,140,255,0.18),transparent_70%)]" />
-          <h2 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Stop guessing at process change.{" "}
-            <span className="text-gradient">Simulate it.</span>
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-lg text-[var(--muted)]">
-            Download ArkSim, load the sample process, and have your first
-            baseline-vs-target result inside ten minutes.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <a
-              href="#download"
-              className="btn-primary inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-base"
-            >
-              Download ArkSim
-              <IconArrow width={18} height={18} />
-            </a>
-            <a
-              href="#contact"
-              className="btn-ghost inline-flex items-center gap-2 rounded-xl px-7 py-3.5 text-base"
-            >
-              Talk to us
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* ---------------- Contact ---------------- */}
       <section id="contact" className="mx-auto max-w-2xl px-5 py-16">
         <SectionHeading
@@ -538,24 +505,13 @@ export default function Home() {
 
       {/* ---------------- Footer ---------------- */}
       <footer className="border-t border-[var(--border)]">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-10 sm:flex-row">
+        <div className="mx-auto flex max-w-6xl items-center justify-center px-5 py-10">
           <div className="flex items-center gap-2.5">
             <Logo />
             <span className="font-semibold">ArkSim</span>
             <span className="text-sm text-[var(--muted-2)]">
               · Process simulation, made simple
             </span>
-          </div>
-          <div className="flex items-center gap-6 text-sm text-[var(--muted)]">
-            <a href="#features" className="hover:text-[var(--foreground)]">
-              Features
-            </a>
-            <a href="#access" className="hover:text-[var(--foreground)]">
-              Access
-            </a>
-            <a href="#contact" className="hover:text-[var(--foreground)]">
-              Contact
-            </a>
           </div>
         </div>
         <div className="border-t border-[var(--border)] py-5 text-center text-xs text-[var(--muted-2)]">
